@@ -1,7 +1,7 @@
 ---
 title: "Linear regression: Abalone growth and pH example"
-author: "your name here"
-date: "insert date here"
+author: "Iván Morales"
+date: "2026-02-20"
 format:
   html:
     toc: true # use this to display a table of contents
@@ -32,19 +32,19 @@ Data from Hamilton et al. 2022. "Integrated multi-trophic aquaculture mitigates 
 
 Question: How does pH predict abalone growth (measured in change in shell surface area per day, mm^-2^ d^-1^)?  
 
-H~0~: **[fill in here]**  
+H~0~: **pH does not predict abalone growth (chnage in shell surface area per day mm^2^**  
 
-H~A~: **[fill in here]**
+H~A~: **pH does not predict abalone growth (chnage in shell surface area per day mm^2^G**
 
 ## b. Cleaning
 
 ```{r abalone-data-cleaning}
 # 
-abalone_clean <- abalone  
+abalone_clean <- abalone |>   
   # 
-  clean_names()  
+  clean_names()  |> 
   # 
-  select(mean_p_h, change_in_area_mm2_d_1_25)  
+  select(mean_p_h, change_in_area_mm2_d_1_25)  |> 
   # 
   rename(mean_ph = mean_p_h, 
          change_in_area = change_in_area_mm2_d_1_25)
@@ -55,10 +55,10 @@ Don't forget to look at your data! Use `View(abalone_clean)` in the _Console_.
 ## c. Exploratory data visualization
 
 ```{r abalone-scatterplot}
-# 
-ggplot(data = abalone_clean, # 
-       aes(x = mean_ph, # 
-           y = change_in_area)) 
+# base layer: ggplot
+ggplot(data = abalone_clean, # data is abalone_clean
+       aes(x = mean_ph, # x is mean_ph (predictor variable)
+           y = change_in_area)) + # y is change in area (response variable)
   # 
   geom_point(size = 4,
              stroke = 1,
