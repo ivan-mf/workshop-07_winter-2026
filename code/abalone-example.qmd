@@ -92,7 +92,7 @@ par(mfrow = c(2, 2))   #
 plot(abalone_model)    # 
 
 ```
-
+**Residuals seem homeoscedastic (consistent across values) based on Residuals vs Fitted and Scale-Location plots. Residuals seem normally distributed based on the QQ plot, the points mostly follow the reference line. There were also no outliers that might influence model estimates or predictions.  **
 ### Model summary
 
 ```{r abalone-model-summary}
