@@ -93,6 +93,7 @@ plot(abalone_model)    #
 
 ```
 **Residuals seem homeoscedastic (consistent across values) based on Residuals vs Fitted and Scale-Location plots. Residuals seem normally distributed based on the QQ plot, the points mostly follow the reference line. There were also no outliers that might influence model estimates or predictions.  **
+
 ### Model summary
 
 ```{r abalone-model-summary}
@@ -102,9 +103,10 @@ summary(abalone_model)
 
 ```
 
+**With each increase in pH, the model predicts  an increase of 3.0 +- in change in shell surface area  per day (mm2 d-1))**
 What is the slope estimate (with standard error?)  
 
-**insert your response here**  
+**When pH = 0, the model preicts that abalone change in shell surface area per day is -18.5. (Note to self: this is not necessarily biological realistic, but is something the model generates**  
 
 What is the intercept estimate (with standard error?)  
 
@@ -128,8 +130,12 @@ Look at the column names using `colnames(abalone_preds)` in the Console.
 
 What are the column names?  
 
-**insert your notes here**  
+**x is predictior values for pH**
 
+**predicted is the model predictions for change area per day**
+**st error: (Standar error describing precision in model predictions**
+**Conf. low and conf. high (lower and uper** 
+))
 Look at the actual object (by clicking on it in Environment).  
 
 Look at the class of the object using `class(abalone_preds)` in the Console.  
@@ -158,7 +164,7 @@ ggpredict(
 
 How would you interpret this?  
 
-**insert your response here**
+**At pH = 8 the model predicts that abalone change in shell area per day id... **
 
 ### Visualizing model predictions and data
 
@@ -168,12 +174,12 @@ How would you interpret this?
 # using clean data frame
 ggplot(data = abalone_clean,
        aes(x = mean_ph,
-           y = change_in_area)) 
+           y = change_in_area)) +
   # first layer: points representing abalones
   geom_point(size = 4,
              stroke = 1,
              fill = "firebrick4",
-             shape = 21) 
+             shape = 21) +
   # second layer: ribbon representing confidence interval
   # using predictions data frame
   geom_ribbon(data = abalone_preds,
@@ -181,15 +187,15 @@ ggplot(data = abalone_clean,
                   y = predicted,
                   ymin = conf.low,
                   ymax = conf.high),
-              alpha = 0.1) 
+              alpha = 0.1) +
   # third layer: line representing model predictions
   # using predictions data frame
   geom_line(data = abalone_preds,
             aes(x = x,
-                y = predicted)) 
+                y = predicted)) +
   # axis labels
   labs(x = "Mean pH", 
-       y = expression("Change in shell area ("*mm^{2}~d^-1*")")) 
+       y = expression("Change in shell area ("*mm^{2}~d^-1*")")) +
   # theme
   theme_minimal()
 ```
